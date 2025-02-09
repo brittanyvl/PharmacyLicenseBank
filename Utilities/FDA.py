@@ -175,5 +175,7 @@ def clean_fda_503b_list(download: pd.DataFrame) -> pd.DataFrame:
     # Cast post_inspectio_action_date to datetime
     df['post_inspection_action_date'] = pd.to_datetime(df['post_inspection_action_date'])
 
+    df.loc[df['post_inspection_action'].str.contains('FMD-145', na=False), 'post_inspection_action'] = 'FMD-145 Letter Issued'
+
     return df
 

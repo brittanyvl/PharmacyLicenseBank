@@ -1,4 +1,6 @@
 import streamlit as st
+
+import PharmacyBank.analysis
 from PharmacyBank.data_loader import load_data
 from PharmacyBank.analysis import *
 
@@ -21,18 +23,19 @@ def home_page():
             st.metric("% Compounding Sterile", f"{metric_percent_intend_sterile}%")  # Adding '%' sign
 
         with col3:
-            st.metric("% Uninspected by FDA", f"{metric_percent_fda_uninspected}%")  # Adding '%' sign
+            st.metric("Uninspected by FDA", f"{metric_percent_fda_uninspected}%")  # Adding '%' sign
 
         with col4:
-            st.metric("% with FDA Recalls", f"{metric_percent_recalls_conducted}%")  # Adding '%' sign
+            st.metric("Facilities with FDA Recalls", f"{metric_percent_recalls_conducted}%")  # Adding '%' sign
 
         with col5:
-            st.metric("% with 483s Issued", f"{metric_percent_483s_issued}%")  # Adding '%' sign
+            st.metric("Facilites with 483s", f"{metric_percent_483s_issued}%")  # Adding '%' sign
+
+        # Display
+        st.altair_chart(chart_post_inspection_actions, use_container_width=True)
 
         # Optionally display the DataFrame below the metrics
-        st.dataframe(st.session_state['data'])
-
-        # Optionally display the DataFrame below the metrics
+        st.write("Download the entire data set below.")
         st.dataframe(st.session_state['data'])
 
     else:
