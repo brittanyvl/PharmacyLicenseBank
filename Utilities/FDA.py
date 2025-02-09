@@ -175,5 +175,5 @@ def clean_fda_503b_list(download: pd.DataFrame) -> pd.DataFrame:
     # Cast post_inspectio_action_date to datetime
     df['post_inspection_action_date'] = pd.to_datetime(df['post_inspection_action_date'])
 
-
     return df
+
