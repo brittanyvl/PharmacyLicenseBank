@@ -9,7 +9,7 @@ def load_css():
 def main():
 
     # Set page title
-    st.set_page_config(page_title="My Modular Streamlit App", layout="wide")
+    st.set_page_config(page_title="Active 503B Outsourcing Facilities", layout="wide")
 
     # Load Stylesheet
     load_css()

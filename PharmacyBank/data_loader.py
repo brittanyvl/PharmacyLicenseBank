@@ -1,9 +1,13 @@
 import pandas as pd
+import openpyxl
+from Utilities import FDA
 
 def load_data():
-    # Replace with your actual data source
-    data = pd.DataFrame({
-        "Name": ["Alice", "Bob", "Charlie"],
-        "Age": [25, 30, 35]
-    })
+    # Read in current raw file
+    data = pd.read_excel(r"C:\Users\bvlma\PycharmProjects\PharmacyLicenseBank\Data\FDA_503B\503B_2025-02-09.xlsx",
+                             dtype=str)
+    # Clean file
+    data = FDA.clean_fda_503b_list(data)
+
+    # Return clean file
     return data

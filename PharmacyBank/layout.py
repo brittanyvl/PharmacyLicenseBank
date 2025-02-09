@@ -1,8 +1,8 @@
 import streamlit as st
 
 def display_header():
-    st.title("Welcome to My Modular Streamlit App")
-    st.write("This is an example of a well-structured Streamlit app.")
+    st.title("Active 503B Outsourcing Facilities")
+    st.write("A data application by Brittany Campos")
 
 def display_sidebar():
     menu = st.sidebar.selectbox("Select a Page", ["Home", "About"])
