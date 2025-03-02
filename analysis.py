@@ -1,8 +1,5 @@
-import pandas as pd
-import PharmacyBank
-from PharmacyBank import data_loader
+import data_loader
 import altair as alt
-from geopy.geocoders import Nominatim
 
 data = data_loader.load_data()
 

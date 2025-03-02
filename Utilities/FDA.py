@@ -151,12 +151,13 @@ def clean_fda_503b_list(download: pd.DataFrame) -> pd.DataFrame:
 
     # Cast Not Yet Inspected to np.NaN so we can properly coerce to datetime
     df['last_fda_inspection_date'] = df['last_fda_inspection_date'].replace('NOT YET INSPECTED', np.nan)
-    df['last_fda_inspection_date'] = pd.to_datetime(df['last_fda_inspection_date'])
+    #df['last_fda_inspection_date'] = pd.to_datetime(df['last_fda_inspection_date']
+    df['last_fda_inspection_date'] = pd.to_datetime(df['last_fda_inspection_date'], errors='coerce', infer_datetime_format=True)
     df['no_fda_inspections'] = df['last_fda_inspection_date'].isna()
 
     # Cast initial_registration_date to datetime
     df['initial_registration_date'] = pd.to_datetime(df['initial_registration_date'])
-    df['last_fda_inspection_date'] = pd.to_datetime(df['last_fda_inspection_date'], errors='coerce')
+    df['last_fda_inspection_date'] = pd.to_datetime(df['last_fda_inspection_date'], errors='coerce', infer_datetime_format=True)
 
     # Replace N/A with np.NaN for boolean fields
     df['form_483_issued'] = df['form_483_issued'].apply(lambda x: True if x == 'YES' else False)
@@ -173,7 +174,8 @@ def clean_fda_503b_list(download: pd.DataFrame) -> pd.DataFrame:
     df['post_inspection_action'] = df['post_inspection_action'].str.replace(r'\s*\d{1,2}/\d{1,2}/\d{4}$', '', regex=True)
 
     # Cast post_inspectio_action_date to datetime
-    df['post_inspection_action_date'] = pd.to_datetime(df['post_inspection_action_date'])
+    df['post_inspection_action_date'] = pd.to_datetime(df['post_inspection_action_date'], errors='coerce', infer_datetime_format=True)
+
 
     df.loc[df['post_inspection_action'].str.contains('FMD-145', na=False), 'post_inspection_action'] = 'FMD-145 Letter Issued'
 
