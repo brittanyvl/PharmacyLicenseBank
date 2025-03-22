@@ -151,7 +151,6 @@ def clean_fda_503b_list(download: pd.DataFrame) -> pd.DataFrame:
 
     # Cast Not Yet Inspected to np.NaN so we can properly coerce to datetime
     df['last_fda_inspection_date'] = df['last_fda_inspection_date'].replace('NOT YET INSPECTED', np.nan)
-    #df['last_fda_inspection_date'] = pd.to_datetime(df['last_fda_inspection_date']
     df['last_fda_inspection_date'] = pd.to_datetime(df['last_fda_inspection_date'], errors='coerce', infer_datetime_format=True)
     df['no_fda_inspections'] = df['last_fda_inspection_date'].isna()
 
@@ -173,11 +172,28 @@ def clean_fda_503b_list(download: pd.DataFrame) -> pd.DataFrame:
     # Remove the date from the 'post_inspection_action' column (if a date exists)
     df['post_inspection_action'] = df['post_inspection_action'].str.replace(r'\s*\d{1,2}/\d{1,2}/\d{4}$', '', regex=True)
 
-    # Cast post_inspectio_action_date to datetime
+    # Cast post_inspection_action_date to datetime
     df['post_inspection_action_date'] = pd.to_datetime(df['post_inspection_action_date'], errors='coerce', infer_datetime_format=True)
 
 
     df.loc[df['post_inspection_action'].str.contains('FMD-145', na=False), 'post_inspection_action'] = 'FMD-145 Letter Issued'
 
+    df['post_inspection_action'] = df['post_inspection_action'].str.strip()
+
+    df.columns = df.columns.str.strip('*').str.strip()
+
     return df
 
+
+def save_clean_503B_list(df: pd.DataFrame, target_path: str):
+    # Rename and move the file
+    today_date = datetime.today().strftime('%Y-%m-%d')
+    new_filename = f"503B_cleaned_{today_date}.xlsx"
+
+    # Create the full path
+    full_path = os.path.join(target_path, new_filename)
+
+    # Save to target path
+    df.to_excel(full_path, index=False)
+
+    return df

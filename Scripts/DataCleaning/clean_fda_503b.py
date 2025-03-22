@@ -13,7 +13,12 @@ from Utilities import FDA
 
 
 # Declare file
-download = pd.read_excel(r"C:\Users\bvlma\PycharmProjects\PharmacyLicenseBank\Data\FDA_503B\503B_2025-03-01.xlsx", dtype=str)
+download = pd.read_excel(r"C:\Users\bvlma\PycharmProjects\PharmacyLicenseBank\Data\FDA_503B\503B_2025-03-22.xlsx", dtype=str)
+target_path = r"C:\Users\bvlma\PycharmProjects\503BWatch\Data\FDA_503B"
 
 # Clean File
 cleaned_503b = FDA.clean_fda_503b_list(download)
+
+
+# Save the file
+saved = FDA.save_clean_503B_list(cleaned_503b, target_path)
