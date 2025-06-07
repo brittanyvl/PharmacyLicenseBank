@@ -179,7 +179,7 @@ def clean_fda_503b_list(download: pd.DataFrame) -> pd.DataFrame:
     df.loc[df['post_inspection_action'].str.contains('FMD-145', na=False), 'post_inspection_action'] = 'FMD-145 Letter Issued'
 
     df['post_inspection_action'] = df['post_inspection_action'].str.strip()
-
+ 
     df.columns = df.columns.str.strip('*').str.strip()
 
     return df
