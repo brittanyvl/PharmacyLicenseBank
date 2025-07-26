@@ -37,7 +37,6 @@ def download_current_503b_list(download_path: str, target_path: str):
         # Click the export button
         export_button = driver.find_element(By.CLASS_NAME, "buttons-excel")
         export_button.click()
-
         # Wait for download to complete
         time.sleep(10)  # Adjust based on download speed
 
